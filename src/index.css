@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  padding: 40px;
+  font-family: sans-serif;
+  background-color: #19386b;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font-family: "Pacifico", cursive;
+  font-size: 30px;
+  text-shadow: 2px 2px darkgray;
+  margin: 10px;
+  color: white;
+}
+
+.dialogue-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  min-width: 400px;
+  max-width: 700px;
+  min-height: 300px;
+  padding: 40px;
+  margin: 30px;
+  background-color: #bababa;
+  box-shadow: 10px 10px grey;
+}
+
+.chatroom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 250px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding-top: 30px;
+  padding-bottom: 25px;
+}
+
+.dialogue-item-1 {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  margin-right: 30px;
+  margin-bottom: 20px;
+  padding: 7px;
+  text-align: left;
+  background-color: #efaeeb;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.dialogue-item-2 {
+  width: 80%;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  padding: 7px;
+  text-align: right;
+  background-color: #74db91;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+p {
+  font-family: "Varela Round", sans-serif;
+  margin: 0px;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.the-button {
+  font-family: "Varela Round", sans-serif;
+  background-color: black; /* Green */
+  border: 2px dashed white;
+  color: white;
+  width: 120px;
+  height: 40px;
+  padding: 10px 22px;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 50%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+}
+
+.the-button:hover {
+  border: 2px solid white;
+}
