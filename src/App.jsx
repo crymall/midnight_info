@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { nextLine } from "./utils";
 import "./App.css";
 
@@ -6,22 +6,34 @@ const App = () => {
   const [calls, setCalls] = useState([]);
   const [oneCall, setOneCall] = useState(false);
   const [conversation, setConversation] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [callIndex, setCallIndex] = useState(0);
+
+  const fetchCalls = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://data.cityofnewyork.us/resource/wewp-mm3p.json?$$app_token=jN9hrZIz4CWHZh5DaVasz3ZQq&$limit=100&$offset=${Math.floor(Math.random() * 900)}&$where=time like '12:%25' || '%25AM'`,
+      );
+      const c = await response.json();
+      const theCalls = c.map((call) => ({
+        org: call.agency_name || "NYC 311",
+        issue: call.brief_description || "General Inquiry",
+        resolution: call.call_resolution || "Information Provided",
+        time: call.time,
+      }));
+      setCalls(theCalls);
+      setCallIndex(0); // Reset for the new batch
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
-    fetch(
-      `https://data.cityofnewyork.us/resource/wewp-mm3p.json?$$app_token=jN9hrZIz4CWHZh5DaVasz3ZQq&$limit=100&$offset=${Math.floor(Math.random() * 900)}&$where=time like '12:%25' || '%25AM'`,
-    )
-      .then((data) => data.json())
-      .then((c) => {
-        let theCalls = c.map((call) => ({
-          org: call.agency_name || "NYC 311",
-          issue: call.brief_description || "General Inquiry",
-          resolution: call.call_resolution || "Information Provided",
-          time: call.time,
-        }));
-        setCalls(theCalls);
-      });
-  }, []);
+    fetchCalls();
+  }, [fetchCalls]);
 
   const start = () => {
     if (conversation.length > 0 && conversation.length < 4) {
@@ -29,16 +41,33 @@ const App = () => {
       return;
     }
 
-    if (calls.length === 0) return;
-    let one = calls[Math.floor(Math.random() * calls.length)];
-    while (one.issue && one.issue.split(" ")[0] === "Hidden") {
-      one = calls[Math.floor(Math.random() * calls.length)];
+    if (calls.length > 0 && callIndex >= calls.length) {
+      fetchCalls();
+      return;
     }
+
+    if (calls.length === 0) return;
+
+    let currentIndex = callIndex;
+    let one = calls[currentIndex];
+
+    while (one && one.issue && one.issue.split(" ")[0] === "Hidden") {
+      currentIndex++;
+      one = calls[currentIndex];
+    }
+
+    if (!one) {
+      fetchCalls();
+      return;
+    }
+
     setOneCall(one);
     setConversation([one.org]);
+    setCallIndex(currentIndex + 1);
   };
 
   const buttonText = () => {
+    if (loading) return "Loading...";
     switch (conversation.length) {
       case 0:
         return "New Call";
@@ -85,7 +114,7 @@ const App = () => {
             );
           })}
         </div>
-        <button className="the-button" onClick={start}>
+        <button className="the-button" onClick={start} disabled={loading}>
           {buttonText()}
         </button>
       </div>
