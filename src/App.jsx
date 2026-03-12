@@ -57,7 +57,7 @@ const App = () => {
           <span className="tooltip-icon">ℹ️</span>
           <div className="tooltip-container">
             <div className="tooltip-content">
-              As of March 9th, 2026, over 400 million calls had been made to NYC's 311 service. This is a visualization of random calls that I made using NYC OpenData's <a href="https://data.cityofnewyork.us/Social-Services/NYC-311-Data/jrb2-thup/about_data">311 API</a>.
+              As of March 9th, 2026, over 400 million calls had been made to NYC's 311 service. This is a visualization of random calls that I made using NYC OpenData's <a href="https://data.cityofnewyork.us/Social-Services/NYC-311-Data/jrb2-thup/about_data">311 API</a>. The twist is: all of the calls are placed at midnight.
               <br />
               <br />
               You're welcome to look at the <a href="https://github.com/crymall/midnight_info">source</a>, but I wrote this ages ago, so it's pretty messy.
