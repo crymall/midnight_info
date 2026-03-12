@@ -12,9 +12,9 @@ body {
   align-items: center;
 }
 
-h3 {
+h1 {
   font-family: "Pacifico", cursive;
-  font-size: 30px;
+  font-size: 40px;
   text-shadow: 2px 2px darkgray;
   margin: 10px;
   color: white;
@@ -46,6 +46,10 @@ h3 {
   padding-top: 30px;
   padding-bottom: 25px;
   color: black;
+
+  p {
+    font-size: 22px;
+  }
 }
 
 .dialogue-item-1 {
@@ -90,8 +94,8 @@ p {
   height: 40px;
   padding: 10px 22px;
   text-align: center;
-  margin-top: 10px;
-  margin-left: 50%;
+  margin-top: 25px;
+  margin-left: 65%;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
@@ -100,4 +104,47 @@ p {
 
 .the-button:hover {
   border: 2px solid white;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-icon {
+  font-size: 0.3em;
+  margin-left: 5px;
+  cursor: help;
+  vertical-align: text-top;
+}
+
+.tooltip-container {
+  visibility: hidden;
+  width: 285px;
+  background-color: #bababa;
+  color: black;
+  padding: 10px;
+  position: absolute;
+  z-index: 100;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 5px 5px 0px grey;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  text-shadow: none;
+}
+
+.tooltip:hover .tooltip-container {
+  visibility: visible;
+  opacity: 1;
+}
+
+.tooltip-content {
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 10px;
 }
